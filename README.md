@@ -3,14 +3,14 @@ CS 3300 Project 1
 
 Team Members:
 
-Arjun Mannan
+Arjun Mannan,
 
-Eric Ming
+Eric Ming,
 
-Joe Yoo
+Joe Yoo,
 
-Kendall Taylor
+Kendall Taylor,
 
-Kotoe Takeda
+Kotoe Takeda,
 
 Smaran Mishra
