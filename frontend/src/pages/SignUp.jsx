@@ -52,7 +52,7 @@ const SignUp = () => {
                         Name: <input type="text" name="fname" />
                         Email: <input type="text" name="femail" />
                         Username: <input type="text" name="fusername" />
-                        Password: <input type="text" name="fpassword" />
+                        Password: <input type="password" name="fpassword" />
                         <input type="submit" value="Submit" />
 
                     </form>
