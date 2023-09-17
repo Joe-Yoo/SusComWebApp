@@ -7,6 +7,7 @@ const SignUp = () => {
         const b = document.forms["myForm"]["femail"].value;
         const c = document.forms["myForm"]["fusername"].value;
         const d = document.forms["myForm"]["fpassword"].value;
+        const f = document.forms["myForm"]["fpassword1"].value;
         if (a === "") {
             alert("Name must be filled out");
             return false;
@@ -18,6 +19,9 @@ const SignUp = () => {
             return false;
         } else if (d == "") {
             alert("Password must be filled out");
+            return false;
+        } else if (d != f) {
+            alert("Passwords must be matching");
             return false;
         }
         return true; //form is valid
@@ -39,21 +43,41 @@ const SignUp = () => {
                         background-color: #9AB106;
                         text-align: center;
                     }
+                    form {
+                        position: absolute;
+                        right: 100px;
+                        top: center;
+                        display: inline-block;
+                        background-color: #AA7B08;
+                    }
+                    div.form
+                    {
+                        display: block;
+                        text-align: right;
+                    }
                 `}</style>
             </head>
             <body>
-                <div>
+                <div class="title">
+                    <h1>Sustainable Commit Web App</h1>
+                </div>
+
+                <div class="form">
                     <form
                         name="myForm"
                         action="/action_page.php"
                         onSubmit={handleSubmit}
                         method="post"
                     >
-                        Name: <input type="text" name="fname" />
-                        Email: <input type="text" name="femail" />
-                        Username: <input type="text" name="fusername" />
-                        Password: <input type="text" name="fpassword" />
+                        <br></br>
+                        Name: <input type="text" name="fname" /> <br></br>
+                        Email: <input type="text" name="femail" /> <br></br>
+                        Username: <input type="text" name="fusername" /> <br></br>
+                        Password: <input type="password" name="fpassword" /> <br></br>
+                        Confirm Password: <input type="password" name="fpassword1" /> <br></br>
                         <input type="submit" value="Submit" />
+                        <br></br>
+                        <br></br>
 
                     </form>
                 </div>
