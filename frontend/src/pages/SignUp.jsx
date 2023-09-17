@@ -58,6 +58,10 @@ const SignUp = () => {
                 `}</style>
             </head>
             <body>
+                <div class="title">
+                    <h1>Sustainable Commit Web App</h1>
+                </div>
+
                 <div class="form">
                     <form
                         name="myForm"
