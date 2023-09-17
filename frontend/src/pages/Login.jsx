@@ -2,12 +2,12 @@
 import { Outlet, Link } from "react-router-dom";
 const Login = () => {
   const validateForm = () => {
-    const c = document.forms["myForm"]["fusername"].value;
-    const d = document.forms["myForm"]["fpassword"].value;
-    if (c == "") {
+    const a = document.forms["myForm"]["fusername"].value;
+    const b = document.forms["myForm"]["fpassword"].value;
+    if (a == "") {
         alert("Username must be filled out");
         return false;
-    } else if (d == "") {
+    } else if (b == "") {
         alert("Password must be filled out");
         return false;
     }
