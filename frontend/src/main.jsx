@@ -3,28 +3,32 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 
 // Route Pages Imports
-import LandingPage from "./pages/LandingPage.jsx";
-import LoginPage from "./pages/Login.jsx"
-import SignUpPage from "./pages/SignUp.jsx"
+import Landing from "./pages/Landing.jsx";
+import Login from "./pages/Login.jsx"
+import Signup from "./pages/Signup.jsx"
+import Dashboard from "./pages/Dashboard.jsx"
 
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
 } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage />,
+    element: <Landing />,
   },
   {
-    path: "Login/",
-    element: <LoginPage />,
+    path: "/login",
+    element: <Login />,
   },
   {
-    path: "SignUp/",
-    element: <SignUpPage />,
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
 ]);
 
