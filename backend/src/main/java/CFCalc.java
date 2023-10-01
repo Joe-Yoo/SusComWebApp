@@ -46,13 +46,14 @@ public class CFCalc {
         if (distance < 0) {
             throw new RuntimeException("Distance has not been set yet.");
         }
-        return getEmissionFactor(co) * distance;
+        return getEmissionFactor(co) * distance / ((double) getPplPerOption(co));
     }
 
     public double calcCF(CommuteOption co, double distance) {
         setDistance(distance);
         return calcCF(co);
     }
+
 
     /** ======================================================================
      * 
@@ -123,25 +124,9 @@ public class CFCalc {
         return distance;
     }
 
-    public int getPplPerCar() {
-        return pplPerCar;
-    } 
-    
-    public int getPplPerBus() {
-        return pplPerBus;
-    }
-    
-    public int getPplPerTrain() {
-        return pplPerTrain;
-    }
-
-    public double getEmissionFactor(CommuteOption op) {
+    public double getEmissionFactor(CommuteOption co) {
         double rate = 0;
-        switch(op) {
-            case WALKING:
-                break;
-            case BIKING:
-                break;
+        switch(co) {
             case GAS_CAR:
                 rate = gasCarRate;
                 break;
@@ -155,11 +140,31 @@ public class CFCalc {
                 rate = trainRate;
                 break;
             default:
-                throw new IllegalArgumentException("Invalid commute option");
+                break;
         }
         return rate;
     }
 
+    private int getPplPerOption(CommuteOption co) {
+        int ppl = 1;
+        switch(co) {
+            case GAS_CAR:
+                ppl = pplPerCar;
+                break;
+            case ELECTRIC_CAR:
+                ppl = pplPerCar;
+                break;
+            case BUS:
+                ppl = pplPerBus;
+                break;
+            case TRAIN:
+                ppl = pplPerTrain;
+                break;
+            default:
+                break;
+        }
+        return ppl;
+    }
 // ========================== RESET VALUES =================================
     /**
      * Resets the rate of the CO2 emission rates to default values.
@@ -174,6 +179,9 @@ public class CFCalc {
         //==============================
         // Average values will be searched later lol
         // TODO: Finish this up
+        elecCarRate = 0;
+        busRate = 0;
+        trainRate = 0;
     }
 
     /**
@@ -185,6 +193,8 @@ public class CFCalc {
         pplPerCar = 1;
 
         // TODO: Finish this up.
+        pplPerBus = 20;
+        pplPerTrain = 100;
     }
 
     /**
