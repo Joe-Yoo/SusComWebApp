@@ -35,7 +35,7 @@ const Login = () => {
         >
           Username: <input type="text" name="fusername" />
           Password: <input type="password" name="fpassword" />
-          <input type="submit" value="Submit" />
+          <a><Link to="/dashboard"><input type="submit" value="Submit" /></Link></a>
         </form>
       </div>
     </>
