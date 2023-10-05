@@ -1,7 +1,10 @@
+package main.java.com.example.restservice;
+
 public class CFCalc {
     private static CFCalc calc = null;
     
     // CO2 Rates
+    //
     private double walkRate, cycleRate, gasCarRate, elecCarRate, busRate, trainRate; 
 
     // carpool/public transportation people count
@@ -73,39 +76,42 @@ public class CFCalc {
         distance = n;
     }
 
-    public void setGasCarRate(double n) {
-        checkValidInput(n);
-        gasCarRate = n;
+    public int setRate(CommuteOption co, double n) {
+        switch(co) {
+            case GAS_CAR:
+                gasCarRate = n;
+                break;
+            case ELECTRIC_CAR:
+                elecCarRate = n;
+                break;
+            case BUS:
+                busRate = n;
+                break;
+            case TRAIN:
+                trainRate = n;
+                break;
+            default:
+                return -1;
+
+        }
+        return 1;
     }
 
-    public void setElecCarRate(double n) {
-        checkValidInput(n);
-        elecCarRate = n;
-    }
-
-    public void setBusRate(double n) {
-        checkValidInput(n);
-        busRate = n;
-    }
-
-    public void setTrainRate(double n) {
-        checkValidInput(n);
-        trainRate = n;
-    }
-
-    public void setCarpool(int n) {
-        checkValidInput(n);
-        pplPerCar = n;
-    }
-
-    public void setPplPerBus(int n) {
-        checkValidInput(n);
-        pplPerBus = n;
-    }
-
-    public void setPplPerTrain(int n) {
-        checkValidInput(n);
-        pplPerTrain = n;
+    public int setCarpool(CommuteOption co, int n) {
+        switch(co) {
+            case GAS_CAR, ELECTRIC_CAR:
+                pplPerCar = n;
+                break;
+            case BUS:
+                pplPerBus = n;
+                break;
+            case TRAIN:
+                pplPerTrain = n;
+                break;
+            default:
+                return -1;
+        }
+        return 1;
     }
 
     private void checkValidInput(double n) {
@@ -148,10 +154,7 @@ public class CFCalc {
     private int getPplPerOption(CommuteOption co) {
         int ppl = 1;
         switch(co) {
-            case GAS_CAR:
-                ppl = pplPerCar;
-                break;
-            case ELECTRIC_CAR:
+            case GAS_CAR, ELECTRIC_CAR:
                 ppl = pplPerCar;
                 break;
             case BUS:
@@ -177,24 +180,22 @@ public class CFCalc {
         gasCarRate = 2.31; // kg CO2 per liter of gasoline
 
         //==============================
-        // Average values will be searched later lol
-        // TODO: Finish this up
-        elecCarRate = 0;
-        busRate = 0;
-        trainRate = 0;
+        // Really rough values lol
+        //
+        elecCarRate = .376;
+        busRate = 23.92;
+        trainRate = 142400;
     }
 
-    /**
+    /**W
      * Resets the amount of ppl per transportation option.
      * Average values determined from online search.
      */
     public void resetPplCount() {
         // passenger amount Init
         pplPerCar = 1;
-
-        // TODO: Finish this up.
-        pplPerBus = 20;
-        pplPerTrain = 100;
+        pplPerBus = 50;
+        pplPerTrain = 500;
     }
 
     /**
