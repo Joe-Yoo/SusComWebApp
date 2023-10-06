@@ -1,5 +1,7 @@
 import "../styles/Dashboard.css";
+
 const Dashboard = () => {
+
   return (
     <>
     <section class="text">
@@ -29,6 +31,19 @@ const Dashboard = () => {
         <p>Emission Factor: </p>
         <p>Carbon Footprint: </p>
       </div>
+    </section>
+    <section class="map">
+
+
+      
+<iframe
+  width="1000"
+  height="1000"
+  frameborder="0"
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,Georgia"
+  allowfullscreen>
+</iframe>
     </section>
     </>
   );
