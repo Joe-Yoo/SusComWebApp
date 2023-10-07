@@ -1,26 +1,18 @@
 import { Outlet, Link } from "react-router-dom";
-import "../styles/Signup.css";
+import "../styles/SignUp.css";
 
-const Signup = () => {
+const SignUp = () => {
   const validateForm = () => {
-    const a = document.forms["myForm"]["fname"].value;
-    const b = document.forms["myForm"]["femail"].value;
-    const c = document.forms["myForm"]["fusername"].value;
-    const d = document.forms["myForm"]["fpassword"].value;
-    const f = document.forms["myForm"]["fpassword1"].value;
-    if (a === "") {
-      alert("Name must be filled out");
-      return false;
-    } else if (b == "") {
+    const a = document.forms["myForm"]["femail"].value;
+    const b = document.forms["myForm"]["fpassword"].value;
+    const c = document.forms["myForm"]["fpassword1"].value;
+    if (a == "") {
       alert("Email must be filled out");
       return false;
-    } else if (c == "") {
-      alert("Username must be filled out");
-      return false;
-    } else if (d == "") {
+    } else if (b == "") {
       alert("Password must be filled out");
       return false;
-    } else if (d != f) {
+    } else if (b != c) {
       alert("Passwords must be matching");
       return false;
     }
@@ -48,9 +40,7 @@ const Signup = () => {
           method="post"
         >
           <br></br>
-          Name: <input type="text" name="fname" /> <br></br>
-          Email: <input type="text" name="femail" /> <br></br>
-          Username: <input type="text" name="fusername" /> <br></br>
+          Email: <input type="email" name="femail" /> <br></br>
           Password: <input type="password" name="fpassword" /> <br></br>
           Confirm Password: <input type="password" name="fpassword1" />{" "}
           <br></br>
@@ -63,4 +53,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignUp;

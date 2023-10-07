@@ -5,7 +5,7 @@ import './index.css'
 // Route Pages Imports
 import Landing from "./pages/Landing.jsx";
 import Login from "./pages/Login.jsx"
-import Signup from "./pages/Signup.jsx"
+import SignUp from "./pages/SignUp.jsx"
 import Dashboard from "./pages/Dashboard.jsx"
 
 import {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: <SignUp />,
   },
   {
     path: "/dashboard",
