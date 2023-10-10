@@ -1,0 +1,30 @@
+body {
+    background-image: url('src/styles/google map temp img.webp');
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+.text {
+    background-color: white;
+    margin: 10%;
+    padding: 10%;
+    height: 300%;
+    width: 200%;
+}
+form {
+    display: grid;
+}
+.address {
+    margin-bottom: 10%;
+}
+input[type=text] {
+    padding: 10px;
+    width: 80%;
+    margin-bottom: 1%;
+    border-radius: 25px;
+    border-color: black;
+}
+input[type=submit] {
+    border-radius: 25px;
+    padding: 10px;
+    transform-origin: center right;
+}

@@ -1,0 +1,1 @@
+{"originAddresses":["Atlanta, GA, USA"],"destinationAddresses":["Savannah, GA, USA"],"rows":[{"elements":[{"status":"OK","duration":{"inSeconds":13067,"humanReadable":"3 hours 38 mins"},"durationInTraffic":null,"distance":{"inMeters":399662,"humanReadable":"400 km"},"fare":null}]}]}
