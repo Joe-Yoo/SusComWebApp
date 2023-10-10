@@ -1,50 +1,58 @@
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
-
+  
   return (
-    <>
-    <section class="text">
-      <h3>Where are we going today?</h3>
-      <div class = "address">
-        <form
-            name="myForm"
-            /*action="/action_page.php"
-            onSubmit={handleSubmit}
-            method="post"*/
-            >
-            <br></br>
-            <div>
-              <input type="text" name="fname" placeholder="From"/> <br></br>
-              <input type="text" name="femail" placeholder="To" /> <br></br>
-            </div>
-            <div>
-              <input type="submit" value="Go" />
-            </div>
-            <br></br>
-          </form>
-      </div>
-      <div class="carbon">
-        <h3>Carbon Footprint</h3>
-        <p>Transportation Method: </p>
-        <p>Distance: </p>
-        <p>Emission Factor: </p>
-        <p>Carbon Footprint: </p>
-      </div>
-    </section>
-    <section class="map">
+  <>
 
+  <head>
+    <title>Place Autocomplete and Directions</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-      
-<iframe
-  width="1000"
-  height="1000"
-  frameborder="0"
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,Georgia"
-  allowfullscreen>
-</iframe>
-    </section>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script type="module" src="./index.ts"></script>
+  </head>
+  <body>
+  <div style={{display: 'none'}}>
+      <input
+        id="origin-input"
+        className="controls"
+        type="text"
+        placeholder="Enter an origin location"
+      />
+
+      <input
+        id="destination-input"
+        className="controls"
+        type="text"
+        placeholder="Enter a destination location"
+      />
+
+      <div id="mode-selector" className="controls">
+        <input
+          type="radio"
+          name="type"
+          id="changemode-walking"
+        />
+        
+        <label htmlFor="changemode-walking">Walking</label>
+
+        <input type="radio" name="type" id="changemode-transit" />
+        <label htmlFor="changemode-transit">Transit</label>
+
+        <input type="radio" name="type" id="changemode-driving" />
+        <label htmlFor="changemode-driving">Driving</label>
+      </div>
+    </div>
+
+    <div id="map">
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+    </div>
+  </body>
     </>
   );
 };
