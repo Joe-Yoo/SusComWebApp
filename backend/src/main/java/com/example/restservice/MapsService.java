@@ -17,7 +17,7 @@ public class MapsService {
 
     public MapsService() {
         this.geoApiContext = new GeoApiContext.Builder()
-                .apiKey("INSERT_API_KEY")
+                .apiKey("AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo")
                 .build();
     }
 
