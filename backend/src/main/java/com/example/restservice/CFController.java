@@ -7,7 +7,6 @@ import static main.java.com.example.restservice.CFCalc.getCFCalc;
 
 @RestController
 public class CFController {
-
     private static CFCalc calc = getCFCalc();
     private static CommuteOption commuteOption = CommuteOption.WALKING;
 
