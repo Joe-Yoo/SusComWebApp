@@ -1,7 +1,11 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 import "../styles/SignUp.css";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const validateForm = () => {
     const a = document.forms["myForm"]["femail"].value;
     const b = document.forms["myForm"]["fpassword"].value;
@@ -18,12 +22,25 @@ const SignUp = () => {
     }
     return true; //form is valid
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); //prevent the default form submission
     if (validateForm()) {
       //if the validation passes, you can submit the form here
-      alert("Form submitted successfully");
-      //add you code to submit the form data
+      const email = document.forms["myForm"]["femail"].value;
+      const password = document.forms["myForm"]["fpassword"].value;
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          alert("Signed up successfully");
+          console.log(user.email);
+          navigate("/login");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert(errorCode, errorMessage);
+          console.log(errorCode, errorMessage);
+        });
     }
   };
 
