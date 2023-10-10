@@ -33,7 +33,7 @@ const Login = () => {
           onSubmit={handleSubmit}
           method="post"
         >
-          Username: <input type="text" name="fusername" />
+          Email: <input type="email" name="femail" />
           Password: <input type="password" name="fpassword" />
           <a><Link to="/dashboard"><input type="submit" value="Submit" /></Link></a>
         </form>
