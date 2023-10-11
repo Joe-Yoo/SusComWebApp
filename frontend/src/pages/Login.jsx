@@ -43,6 +43,15 @@ const Login = () => {
 
   return (
     <>
+      <style>
+        {`
+          body {
+            background-image: url('src/styles/google map temp img.webp');
+            background-repeat: no-repeat;
+            background-size:cover;
+          }
+        `}
+      </style>
       <div>
         <form
           name="myForm"

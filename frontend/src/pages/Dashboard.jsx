@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import "../styles/Dashboard.css";
-import { Outlet, Link } from "react-router-dom";
+/*import './Dashboard.css';*/
 
 const Dashboard = () => {
   const [src, setSrc] = useState("");
