@@ -1,5 +1,24 @@
+import { useEffect } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 import "../styles/Dashboard.css";
+
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        alert("Signed out successfully");
+        console.log("Signed out successfully");
+        navigate("/");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
   return (
     <>
     <section class="text">
@@ -30,6 +49,7 @@ const Dashboard = () => {
         <p>Carbon Footprint: </p>
       </div>
     </section>
+    <button onClick={handleLogout}>Logout</button>
     </>
   );
 };
