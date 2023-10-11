@@ -1,4 +1,4 @@
-package main.java.com.example.restservice;
+package com.example.restservice;
 
 public enum CommuteOption {
     WALKING(0),

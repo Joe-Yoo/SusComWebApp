@@ -1,9 +1,9 @@
-package main.java.com.example.restservice;
+package com.example.restservice;
 
 import org.springframework.web.bind.annotation.*;
 
 
-import static main.java.com.example.restservice.CFCalc.getCFCalc;
+import static com.example.restservice.CFCalc.getCFCalc;
 
 @RestController
 public class CFController {
