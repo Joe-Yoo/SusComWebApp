@@ -1,5 +1,23 @@
+import { useEffect } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 import "../styles/Dashboard.css";
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const email = user.email;
+        console.log("email", email);
+      } else {
+        console.log("user is logged out");
+        navigate("/");
+      }
+    });
+  }, []);
+  
   return (
     <>
     <section class="text">
