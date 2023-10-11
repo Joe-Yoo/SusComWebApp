@@ -7,6 +7,18 @@ import "../styles/Dashboard.css";
 const Dashboard = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const email = user.email;
+        console.log("email", email);
+      } else {
+        console.log("user is logged out");
+        navigate("/");
+      }
+    });
+  }, []);
+  
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
