@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
+import "../styles/Dashboard.css";
 import { Outlet, Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -17,6 +21,32 @@ const Dashboard = () => {
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission
     apiCall();
+  }
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const email = user.email;
+        console.log("email", email);
+      } else {
+        console.log("user is logged out");
+        navigate("/");
+      }
+    });
+  }, []);
+  
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        alert("Signed out successfully");
+        console.log("Signed out successfully");
+        navigate("/");
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   return (
@@ -56,6 +86,7 @@ const Dashboard = () => {
             </div>
             <input type="submit" value="Submit" />
           </form>
+
         </div>
         <div className="carbon">
           <h3>Carbon Footprint</h3>
@@ -65,6 +96,7 @@ const Dashboard = () => {
           <p>Carbon Footprint: </p>
         </div>
       </section>
+      <button onClick={handleLogout}>Logout</button>
       <iframe
         width="1000"
         height="1000"
