@@ -30,6 +30,15 @@ const Dashboard = () => {
         <p>Carbon Footprint: </p>
       </div>
     </section>
+
+    <iframe
+  width="1000"
+  height="1000"
+  frameborder="0"
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDtN4t1eej-XKGBItq4zuQfY2NRnFJdEX4&origin=New+York,NY&destination=Atlanta,Georgia"
+  allowfullscreen>
+</iframe>
     </>
   );
 };
