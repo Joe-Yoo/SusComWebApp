@@ -45,7 +45,7 @@ const Login = () => {
       <style>
         {`
           body {
-            background-image: url('src/pages/LoginBackground.png');
+            background-image: url('https://cdn.discordapp.com/attachments/957848619036319755/1162164670300438548/LoginBackground.png?ex=653af131&is=65287c31&hm=2895794153e6d03f8f1ceed12303552d399dce38ca7213e20ffa70f1dbeda57f&');
             background-repeat: no-repeat;
             background-size:cover;
             display: flex;

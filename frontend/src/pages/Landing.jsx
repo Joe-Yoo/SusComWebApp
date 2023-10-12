@@ -5,7 +5,7 @@ const Landing = () => {
     <>
       <style> {`
         body {
-          background-image: url('src/pages/LandingBackground.png');
+          background-image: url('https://cdn.discordapp.com/attachments/957848619036319755/1162164669524492358/LandingBackground.png?ex=653af131&is=65287c31&hm=bb68c0f24d5f8f9cd9a913088418f817f8fde4f96b67a5d4242ecbccd3ea1c20&');
           background-repeat: no-repeat;
           background-size: cover;
         }
