@@ -215,8 +215,69 @@ const Dashboard = () => {
 
   return (
     <>
+    <style> {`
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Sans Serif;
+      text-align: center;
+      color: #3B2F07;
+    }
+    iframe {
+      height: 100vh;
+      width: 100vw;
+    }
+    form {
+      text-align: left;
+      font-size: 22px;
+      padding-left: 5%;
+    }
+    input {
+      padding: 10px 50px;
+      margin-bottom: 2%;
+      border-radius: 25px;
+      border-color: black;
+    }
+    #submit_button {
+      padding: 6px;
+      border-radius: 25px;
+      border-color: black;
+      background-color: #7C882E;
+      color: white;
+      font-size: 22px;
+      font-family: Sans Serif;
+      font-weight: bold;
+    }
+    #submit_button:hover {
+      background-color: #3B2F07;
+    }
+    .carbon {
+      padding-left: 5%;
+      text-align: left;
+      font-size: 22px;
+      color: #3B2F07;
+    }
+    button {
+      padding: 6px;
+      border-radius: 25px;
+      border-color: black;
+      background-color: #7C882E;
+      color: white;
+      font-size: 22px;
+      font-family: Sans Serif;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #3B2F07;
+    }
+    `}
+    </style>
+      <div id="title">
+        <h1>Where are we going today?</h1>
+      </div>
       <section className="text">
-        <h3>Where are we going today?</h3>
+        
         <div className="address">
           <form
             name="myForm"
@@ -232,7 +293,7 @@ const Dashboard = () => {
               placeholder="Enter an origin location"
               value={src}
               onChange={(e) => setSrc(e.target.value)}
-            />
+            />&nbsp;&nbsp;&nbsp;
 
             <input
               id="destination-input"
@@ -250,7 +311,7 @@ const Dashboard = () => {
                 id="changemode-walking"
                 onChange={setWalking}
               />
-              <label htmlFor="changemode-walking">Walking</label>
+              <label htmlFor="changemode-walking">Walking</label>&nbsp;&nbsp;&nbsp;
 
               <input
                 type="radio"
@@ -258,7 +319,7 @@ const Dashboard = () => {
                 id="changemode-transit"
                 onChange={setTransit}
               />
-              <label htmlFor="changemode-transit">Transit</label>
+              <label htmlFor="changemode-transit">Transit</label>&nbsp;&nbsp;&nbsp;
 
               <input
                 type="radio"
@@ -276,7 +337,7 @@ const Dashboard = () => {
               placeholder="Passengers (0 if not driving)"
               value={carpoolNum}
               onChange={(e) => setCarpool(e.target.value)}
-            />
+            />&nbsp;&nbsp;&nbsp;
             <input
               id="fuel"
               className="controls"
@@ -284,9 +345,8 @@ const Dashboard = () => {
               placeholder="Car mpg (0 if not driving)"
               value={fuel}
               onChange={(e) => setFuel(e.target.value)}
-            />
-
-            <input type="submit" value="Submit" />
+            />&nbsp;&nbsp;&nbsp;
+              <input id="submit_button" type="submit" value="Go" />
           </form>
 
           <h3>{comparison1}</h3>
@@ -300,14 +360,16 @@ const Dashboard = () => {
           <p>Carbon Footprint: {carbonFP}</p>
         </div>
       </section>
+      <div id="iframe_container">
+        <iframe
+          width="1000"
+          height="1000"
+          referrerPolicy="no-referrer-when-downgrade"
+          src={link}
+          allowFullScreen
+        ></iframe>
+      </div>
       <button onClick={handleLogout}>Logout</button>
-      <iframe
-        width="1000"
-        height="1000"
-        referrerPolicy="no-referrer-when-downgrade"
-        src={link}
-        allowFullScreen
-      ></iframe>
     </>
   );
 };
