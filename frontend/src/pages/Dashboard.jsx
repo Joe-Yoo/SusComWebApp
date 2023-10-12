@@ -6,7 +6,7 @@ import { Outlet, Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [src, setSrc] = useState("");
-const [dst, setDst] = useState("");
+  const [dst, setDst] = useState("");
   const [dist, setDist] = useState("");
   const [commuteOpt, setOpt] = useState("");
   const [commuteOptNum, setOptNum] = useState(2);
@@ -117,8 +117,10 @@ const [dst, setDst] = useState("");
     var a = "";
     if (commuteOptNum1 == 2) {
       a = "gas car";
+      setComparison1("You saved " + (carbonFP1 - carbonFP) + "kg of CO2 with this transportation mode over " + a + "." ); //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
     }
-    setComparison1("You saved " + (carbonFP1 - carbonFP) + "kg of CO2 with this transportation mode over " + a + "." ); //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
+  } else {
+    setComparison1("You could've saved " + (carbonFP - carbonFP1) + "kg of CO2 with walking over this transportation." );
   }
    
   //setComparison2() //you saved this amount of trees compared to transport mode x.
@@ -155,16 +157,19 @@ const [dst, setDst] = useState("");
     console.log("setWalking");
     setOpt("Walking");
     setOptNum(0);
+    setOptNum1(2);
   }
   const setTransit = () => {
     console.log("setTransit");
     setOpt("Transit");
     setOptNum(4);
+    setOptNum1(2);
   }
   const setDriving = () => {
     console.log("setDriving");
     setOpt("Driving");
     setOptNum(2);
+    setOptNum1(0);
   }
 
   return (
@@ -231,6 +236,8 @@ const [dst, setDst] = useState("");
             
             <input type="submit" value="Submit" />
           </form>
+
+          <h3>{comparison1}</h3>
         </div>
         <div className="carbon">
           <h3>Carbon Footprint</h3>
