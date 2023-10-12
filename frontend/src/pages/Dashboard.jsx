@@ -6,7 +6,7 @@ import { Outlet, Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [src, setSrc] = useState("");
-  const [dst, setDst] = useState("");
+const [dst, setDst] = useState("");
   const [dist, setDist] = useState("");
   const [commuteOpt, setOpt] = useState("");
   const [commuteOptNum, setOptNum] = useState(2);
@@ -33,10 +33,9 @@ const Dashboard = () => {
     )
       .then((response) => response.json())
       .then((json) => {
-        console.log("here");
-        console.log(json);
-        console.log(json.rows[0].elements[0].distance.inMeters);
-        setDist(json.rows[0].elements[0].distance.inMeters);
+        const distance = json.rows[0].elements[0].distance.inMeters;
+        setDist(distance);
+        cfCall(commuteOptNum, distance);
       })
       .catch((err) => {
         console.log(err.message);
@@ -92,7 +91,6 @@ const Dashboard = () => {
     mapApiCall();
     distanceApiCall(src, dst);
     // setCarpoolCall(carpoolNum);
-    cfCall(commuteOptNum, dist);
     emFactorCall(commuteOptNum);
   };
 
