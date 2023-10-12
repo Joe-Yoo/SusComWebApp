@@ -87,9 +87,11 @@ const Dashboard = () => {
      * All dependent on the input fields.
      */
 
+    console.log(commuteOpt);
+    console.log(commuteOptNum);
     mapApiCall();
     distanceApiCall(src, dst);
-    setCarpoolCall(carpoolNum);
+    // setCarpoolCall(carpoolNum);
     cfCall(commuteOptNum, dist);
     emFactorCall(commuteOptNum);
   };
@@ -119,6 +121,22 @@ const Dashboard = () => {
         alert(error);
       });
   };
+
+  const setWalking = () => {
+    console.log("setWalking");
+    setOpt("Walking");
+    setOptNum(0);
+  }
+  const setTransit = () => {
+    console.log("setTransit");
+    setOpt("Transit");
+    setOptNum(4);
+  }
+  const setDriving = () => {
+    console.log("setDriving");
+    setOpt("Driving");
+    setOptNum(2);
+  }
 
   return (
     <>
@@ -155,14 +173,14 @@ const Dashboard = () => {
                 type="radio"
                 name="type"
                 id="changemode-walking"
-                checked="checked"
+                onChange={setWalking}
               />
               <label htmlFor="changemode-walking">Walking</label>
 
-              <input type="radio" name="type" id="changemode-transit" />
+              <input type="radio" name="type" id="changemode-transit" onChange={setTransit}/>
               <label htmlFor="changemode-transit">Transit</label>
 
-              <input type="radio" name="type" id="changemode-driving" />
+              <input type="radio" name="type" id="changemode-driving" onChange={setDriving}/>
               <label htmlFor="changemode-driving">Driving</label>
             </div>
             <input type="submit" value="Submit" />
