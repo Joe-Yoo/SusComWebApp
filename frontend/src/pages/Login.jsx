@@ -1,7 +1,6 @@
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import "../styles/Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,24 +45,66 @@ const Login = () => {
       <style>
         {`
           body {
-            background-image: url('src/styles/google map temp img.webp');
+            background-image: url('src/pages/LoginBackground.png');
             background-repeat: no-repeat;
             background-size:cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Sans Serif;
           }
+          h1 {
+            font-size: 70px;
+            color: #3B2F07;
+            margin-top: -5%;
+          }
+          form {
+            text-align: left;
+          }
+          input {
+            padding: 10px 50px;
+            width: 80%;
+            margin-bottom: 1%;
+            border-radius: 25px;
+            border-color: black;
+          }
+          #submit_container {
+            margin-top: 5%;
+            text-align: center;
+          }
+          #submit_button {
+            padding: 10px;
+            border-radius: 25px;
+            border-color: black;
+            background-color: #7C882E;
+            color: white;
+            font-size: 22px;
+            font-family: Sans Serif;
+            text-weight: 400;
+          }
+          #submit_button:hover {
+            background-color: #3B2F07;
         `}
       </style>
-      <div>
-        <form
-          name="myForm"
-          action="/action_page.php"
-          onSubmit={handleSubmit}
-          method="post"
-        >
-          Email: <input type="email" name="femail" />
-          Password: <input type="password" name="fpassword" />
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
+      <section id="textSection">
+        <h1>Welcome Back</h1>
+        <div id="form_container">
+          <form
+            name="myForm"
+            action="/action_page.php"
+            onSubmit={handleSubmit}
+            method="post"
+          >
+            <input type="email" placeholder="Email Address" name="femail" />
+            <br></br><br></br>
+            <input type="password" placeholder="Password" name="fpassword" />
+            <br></br>
+            <div id="submit_container">
+              <input id="submit_button" type="submit" value="Submit" />
+            </div>
+          </form>
+        </div>
+      </section>
     </>
   );
 };
