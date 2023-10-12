@@ -60,6 +60,7 @@ const Login = () => {
           }
           form {
             text-align: left;
+            font-size: 22px;
           }
           input {
             padding: 10px 50px;
@@ -69,7 +70,7 @@ const Login = () => {
             border-color: black;
           }
           #submit_container {
-            margin-top: 5%;
+            margin-top: 10%;
             text-align: center;
           }
           #submit_button {
@@ -86,25 +87,23 @@ const Login = () => {
             background-color: #3B2F07;
         `}
       </style>
-      <section id="textSection">
-        <h1>Welcome Back</h1>
-        <div id="form_container">
-          <form
-            name="myForm"
-            action="/action_page.php"
-            onSubmit={handleSubmit}
-            method="post"
-          >
-            <input type="email" placeholder="Email Address" name="femail" />
-            <br></br><br></br>
-            <input type="password" placeholder="Password" name="fpassword" />
-            <br></br>
-            <div id="submit_container">
-              <input id="submit_button" type="submit" value="Submit" />
-            </div>
-          </form>
-        </div>
-      </section>
+      <h1>Welcome Back</h1>
+      <div id="form_container">
+        <form
+          name="myForm"
+          action="/action_page.php"
+          onSubmit={handleSubmit}
+          method="post"
+        >
+          Email: <input type="email" placeholder="Email Address" name="femail" />
+          <br></br><br></br>
+          Password: <input type="password" placeholder="Password" name="fpassword" />
+          <br></br>
+          <div id="submit_container">
+            <input id="submit_button" type="submit" value="Submit" />
+          </div>
+        </form>
+      </div>
     </>
   );
 };
