@@ -41,7 +41,7 @@ const Dashboard = () => {
         const distance = json.rows[0].elements[0].distance.inMeters;
         setDist(distance);
         cfCall(commuteOptNum, distance);
-        cfCall1(commuteOptNum, distance);
+        cfCall1(commuteOptNum1, distance);
       })
       .catch((err) => {
         console.log(err.message);
@@ -53,14 +53,15 @@ const Dashboard = () => {
       "http://localhost:8080/update/carpool/" +
       commuteOptParam +
       "/" +
-      carpoolNumParam
-    ).catch((err) => {
-      console.log(err.message);
-    });
+      carpoolNumParam,
+      {method: 'PUT'})
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   const cfCall = (commuteOptP, distP) => {
-    fetch("http://localhost:8080/carbon/" + commuteOptP + "/" + distP)
+    fetch("http://localhost:8080/carbon/" + commuteOptP + "/" + distP+"/"+carpoolNum+"/"+fuel)
       .then((response) => response.json())
       .then((data) => {
         setCFP(data);
@@ -71,7 +72,7 @@ const Dashboard = () => {
   };
 
   const cfCall1 = (commuteOptP, distP) => {
-    fetch("http://localhost:8080/carbon/" + commuteOptP + "/" + distP)
+    fetch("http://localhost:8080/carbon/" + commuteOptP + "/" + distP+"/"+carpoolNum+"/"+fuel)
       .then((response) => response.json())
       .then((data) => {
         setCFP1(data);
@@ -91,6 +92,13 @@ const Dashboard = () => {
         console.log(err.message);
       });
   };
+
+  const setMilage = (mileageP) => {
+    fetch("http://localhost:8080/update/mileage/"+mileageP, {method: 'PUT'})
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission
@@ -121,7 +129,9 @@ const Dashboard = () => {
     mapApiCall();
     distanceApiCall(src, dst);
     // setCarpoolCall(carpoolNum);
+    // setMilage(fuel);
     emFactorCall(commuteOptNum);
+    environmentalImpact();
   };
 
   const environmentalImpact = () => {
@@ -170,16 +180,19 @@ const Dashboard = () => {
     console.log("setWalking");
     setOpt("walking");
     setOptNum(0);
+    setOptNum1(2);
   };
   const setTransit = () => {
     console.log("setTransit");
     setOpt("transit");
     setOptNum(4);
+    setOptNum1(2);
   };
   const setDriving = () => {
     console.log("setDriving");
     setOpt("driving");
     setOptNum(2);
+    setOptNum1(0);
   };
 
   return (

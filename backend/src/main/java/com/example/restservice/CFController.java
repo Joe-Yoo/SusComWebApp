@@ -39,6 +39,11 @@ public class CFController {
         return calc.calcCF(CommuteOption.values()[opt], dist);
     }
 
+    @RequestMapping(path = "/carbon/{opt}/{dist}/{ppl}/{mileage}", method = RequestMethod.GET)
+    public double getCarbonEmission(@PathVariable int opt, @PathVariable double dist, @PathVariable int ppl, @PathVariable double mileage) {
+        return calc.calcCF(CommuteOption.values()[opt], dist, ppl, mileage);
+    }
+
     @RequestMapping(path = "/update/commuteoption/{opt}", method = RequestMethod.PUT)
     public void updateCommuteOption(@PathVariable int opt) {
         commuteOption = CommuteOption.values()[opt];
@@ -57,5 +62,10 @@ public class CFController {
     @RequestMapping (path = "/update/carpool/{opt}/{ppl}", method = RequestMethod.PUT)
     public void updateCarpool(@PathVariable int opt, @PathVariable int ppl) {
         calc.setCarpool(CommuteOption.values()[opt], ppl);
+    }
+
+    @RequestMapping (path = "/update/mileage/{mileage}", method = RequestMethod.PUT)
+    public void updateMileage(@PathVariable double mileage) {
+        calc.setMilage(mileage);
     }
 }
