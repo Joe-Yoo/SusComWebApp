@@ -319,7 +319,9 @@ const Dashboard = () => {
                 id="changemode-transit"
                 onChange={setTransit}
               />
-              <label htmlFor="changemode-transit">Transit</label>&nbsp;&nbsp;&nbsp;
+              <label htmlFor="changemode-transit">Public Transportation</label>&nbsp;&nbsp;&nbsp;
+
+
 
               <input
                 type="radio"
