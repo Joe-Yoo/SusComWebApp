@@ -10,12 +10,17 @@ const [dst, setDst] = useState("");
   const [dist, setDist] = useState("");
   const [commuteOpt, setOpt] = useState("");
   const [commuteOptNum, setOptNum] = useState(2);
+  const [commuteOptNum1, setOptNum1] = useState(3);
   const [carpoolNum, setCarpool] = useState(1);
   const [carbonFP, setCFP] = useState("");
+  const [carbonFP1, setCFP1] = useState("");
   const [emFactor, setEmFactor] = useState("");
+  const [fuel, setFuel] = useState("");
   const [link, setLink] = useState(
     "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA",
   );
+  const [comparison1, setComparison1] = useState("");
+  const [comparison2, setComparison2] = useState(""); 
 
   const mapApiCall = () => {
     setLink(
@@ -64,6 +69,17 @@ const [dst, setDst] = useState("");
       });
   };
 
+  const cfCall1 = (commuteOptP, distP) => {
+    fetch("http://localhost:8080/carbon/" + commuteOptP + "/" + distP)
+      .then((response) => response.json())
+      .then((data) => {
+        setCFP1(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   const emFactorCall = (commuteOptP) => {
     fetch("http://localhost:8080/emission/" + commuteOptP)
       .then((response) => response.json())
@@ -91,8 +107,24 @@ const [dst, setDst] = useState("");
     mapApiCall();
     distanceApiCall(src, dst);
     // setCarpoolCall(carpoolNum);
+    cfCall(commuteOptNum, dist);
+    cfCall1(commuteOptNum1, dist);
     emFactorCall(commuteOptNum);
   };
+
+  const environmentalImpact()
+ {
+  if (carbonFP < carbonFP1) {
+    var a = "";
+    if (commuteOptNum1 == 2) {
+      a = "gas car";
+    }
+    setComparison1("You saved " + (carbonFP1 - carbonFP) + "kg of CO2 with this transportation mode over " + a + "." ) //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
+  }
+   
+  setComparison2() //you saved this amount of trees compared to transport mode x.
+ }
+
 
   const navigate = useNavigate();
 
@@ -181,6 +213,23 @@ const [dst, setDst] = useState("");
               <input type="radio" name="type" id="changemode-driving" onChange={setDriving}/>
               <label htmlFor="changemode-driving">Driving</label>
             </div>
+            <input
+              id="carpoolNum"
+              className="controls"
+              type="number"
+              placeholder="Enter passenger quantity"
+              value={carpoolNum}
+              onChange={(e) => setCarpool(e.target.value)}
+            />
+            <input
+              id="fuel"
+              className="controls"
+              type="number"
+              placeholder="Enter car fuel efficiency"
+              value={fuel}
+              onChange={(e) => setFuel(e.target.value)}
+            />
+            
             <input type="submit" value="Submit" />
           </form>
         </div>
@@ -196,7 +245,7 @@ const [dst, setDst] = useState("");
       <iframe
         width="1000"
         height="1000"
-        frameBorder="0"
+        frameborder="0"
         referrerPolicy="no-referrer-when-downgrade"
         src={link}
         allowFullScreen
