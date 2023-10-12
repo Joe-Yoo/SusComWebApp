@@ -10,12 +10,16 @@ const Dashboard = () => {
   const [dist, setDist] = useState("");
   const [commuteOpt, setOpt] = useState("");
   const [commuteOptNum, setOptNum] = useState(2);
+  const [commuteOptNum1, setOptNum1] = useState(3);
   const [carpoolNum, setCarpool] = useState(1);
   const [carbonFP, setCFP] = useState("");
+  const [carbonFP1, setCFP1] = useState("");
   const [emFactor, setEmFactor] = useState("");
   const [link, setLink] = useState(
     "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA",
   );
+  const [comparison1, setComparison1] = useState("");
+  const [comparison2, setComparison2] = useState(""); 
 
   const mapApiCall = () => {
     setLink(
@@ -65,6 +69,17 @@ const Dashboard = () => {
       });
   };
 
+  const cfCall1 = (commuteOptP, distP) => {
+    fetch("http://localhost:8080/carbon/" + commuteOptP + "/" + distP)
+      .then((response) => response.json())
+      .then((data) => {
+        setCFP1(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   const emFactorCall = (commuteOptP) => {
     fetch("http://localhost:8080/emission/" + commuteOptP)
       .then((response) => response.json())
@@ -91,8 +106,23 @@ const Dashboard = () => {
     distanceApiCall(src, dst);
     setCarpoolCall(carpoolNum);
     cfCall(commuteOptNum, dist);
+    cfCall1(commuteOptNum1, dist);
     emFactorCall(commuteOptNum);
   };
+
+  const environmentalImpact()
+ {
+  if (carbonFP < carbonFP1) {
+    var a = "";
+    if (commuteOptNum1 == 2) {
+      a = "gas car";
+    }
+    setComparison1("You saved " + (carbonFP1 - carbonFP) + "kg of CO2 with this transportation mode over " + a + "." ) //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
+  }
+   
+  setComparison2() //you saved this amount of trees compared to transport mode x.
+ }
+
 
   const navigate = useNavigate();
 
