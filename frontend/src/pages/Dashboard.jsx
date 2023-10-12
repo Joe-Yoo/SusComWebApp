@@ -126,19 +126,18 @@ const Dashboard = () => {
   };
 
   const environmentalImpact = () => {
-    if (carbonFP < carbonFP1) {
-      var a = "";
-      if (commuteOptNum1 == 2) {
-        a = "gas car";
-      }
-      setComparison1(
-        "You saved " +
-          (carbonFP1 - carbonFP) +
-          "kg of CO2 with this transportation mode over " +
-          a +
-          "."
-      ); //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
+  if (parseFloat(carbonFP) < parseFloat(carbonFP1)) {
+    var a = "";
+    if (commuteOptNum1 == 2) {
+      a = "gas car";
+      setComparison1("You saved " + (parseFloat(carbonFP1) - parseFloat(carbonFP)) + "kg of CO2 with this transportation mode over " + a + "." ); //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
     }
+  } else {
+    setComparison1("You could've saved " + (parseFloat(carbonFP) - parseFloat(carbonFP1)) + "kg of CO2 with walking over this transportation." );
+  }
+   
+  //setComparison2() //you saved this amount of trees compared to transport mode x.
+ };
 
     //setComparison2() //you saved this amount of trees compared to transport mode x.
   };
@@ -260,6 +259,8 @@ const Dashboard = () => {
 
             <input type="submit" value="Submit" />
           </form>
+
+          <h3>{comparison1}</h3>
         </div>
         <div className="carbon">
           <h3>Carbon Footprint</h3>
