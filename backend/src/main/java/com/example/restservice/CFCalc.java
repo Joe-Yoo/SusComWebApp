@@ -1,4 +1,4 @@
-package main.java.com.example.restservice;
+package com.example.restservice;
 
 public class CFCalc {
     private static CFCalc calc = null;

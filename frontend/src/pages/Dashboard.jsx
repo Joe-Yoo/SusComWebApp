@@ -7,19 +7,78 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const [src, setSrc] = useState("");
   const [dst, setDst] = useState("");
+  const [dist, setDist] = useState("");
+  const [commuteOpt, setOpt] = useState("");
+  const [commuteOptNum, setOptNum] = useState(2);
+  const [carpoolNum, setCarpool] = useState(1);
+  const [carbonFP, setCFP] = useState("");
+  const [emFactor, setEmFactor] = useState("");
   const [link, setLink] = useState(
     "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA"
   );
 
-  const apiCall = () => {
+  const mapApiCall = () => {
     setLink(
       `https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=${src}&destination=${dst}`
     );
   };
 
+  const distanceApiCall = (srcParam, dstParam) => {
+    fetch('http://localhost:8080/api/maps/distance?origin='+srcParam+'&destination='+dstParam+'&mode=driving')
+      .then((response) => response.json())
+      .then((json) => {
+        setDist(json.rows[0].elements[0].distance.inMeters);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  const setCarpoolCall = (commuteOptParam, carpoolNumParam) => {
+    fetch('http://localhost:8080/update/carpool/'+commuteOptParam+"/"+carpoolNumParam)
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  const cfCall = (commuteOptP, distP) => {
+    fetch('http://localhost:8080/carbon/'+commuteOptP+'/'+distP)
+      .then((response) => response.json())
+      .then((data) => {
+        setCFP(data);
+      })
+      .catch((err)=>{
+        console.log(err.message);
+      });
+  }
+
+  const emFactorCall = (commuteOptP) => {
+    fetch('http://localhost:8080/emission/'+commuteOptP)
+    .then((response) => response.json())
+    .then((data) => {
+      setEmFactor(data);
+    })
+    .catch((err)=>{
+      console.log(err.message);
+    });
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission
-    apiCall();
+    /**
+     * Need to update commuteOpt and carpoolNum using:
+     * setOpt for commuteOpt
+     * and
+     * setCarpool for carpoolNum
+     * 
+     * All dependent on the input fields.
+     */
+
+    mapApiCall();
+    distanceApiCall(src, dst);
+    setCarpoolCall(carpoolNum);
+    cfCall(commuteOptNum, dist);
+    emFactorCall(commuteOptNum);
   }
   
   const navigate = useNavigate();
@@ -89,10 +148,10 @@ const Dashboard = () => {
         </div>
         <div className="carbon">
           <h3>Carbon Footprint</h3>
-          <p>Transportation Method: </p>
-          <p>Distance: </p>
-          <p>Emission Factor: </p>
-          <p>Carbon Footprint: </p>
+          <p>Transportation Method: {commuteOpt}</p>
+          <p>Distance: {dist}</p>
+          <p>Emission Factor: {emFactor}</p>
+          <p>Carbon Footprint: {carbonFP}</p>
         </div>
       </section>
       <button onClick={handleLogout}>Logout</button>
