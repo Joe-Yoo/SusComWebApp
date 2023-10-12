@@ -26,19 +26,36 @@ Known bugs and defects:
 
 Install Guide  
 
-Pre-requisites: Java JDK 17
+Pre-requisites: Java JDK 17, Node.js, IntelliJ IDEA
 
-Dependent libraries that must be installed: npm
+Dependent libraries that must be installed:
+- npm:
+    - Open a terminal window
+    - change directory into frontend
+    - execute the following command: npm install
+- maven dependencies
+    - Open a terminal window
+    - change directory into backend
+    - execute the following command: ./mvnw install
 
-Download instructions: 
-- change directory to backend
-- ./mvn build
-- 
+Build/Install/Run instructions: 
+- Springboot server
+    - Open a terminal window
+    - change directory into backend
+    - execute the following command: ./mvnw spring-boot:run
+    - localhost:8080 should be running
+- React.js web applciation (Springboot server should be running for full functionality)
+    - Open a new terminal window
+    - change directory into frontend
+    - execute the following command: npm run dev
+    - localhost:5173 should be running
 
-Build instructions (if needed): if you are providing the raw source code rather than a binary build, how will the customer and users create the required executable application?
-
-Installation of actual application: what steps have to be taken after the software is built? What directories are required for installation?
-
-Run instructions:  what does the user/customer have to do to get the software to execute?
-
-Troubleshooting:  what are common errors that occur during installation and what is the corrective action?
+Troubleshooting:
+- JAVA_HOME is not defined (windows)
+    - Go to settings
+    - Search up "environment variables" and choose the option that says "Edit the system environment variables"
+    - In the window that popped up, click on Environment Variables button
+    - In the new window that popped up, click the new button under "User variables for __{computer username}__"
+    - In the new window that popped up, Set the variable name to JAVA_HOME
+    - In variable value, select "Browse Directory" and then choose the java version that's installed
+        - Normally java is installed in C://Program Files, however if installed somewhere else, you have to find it and select that directory.
