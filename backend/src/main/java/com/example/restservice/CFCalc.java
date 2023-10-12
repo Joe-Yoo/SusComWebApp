@@ -12,6 +12,7 @@ public class CFCalc {
 
     // distance in miles
     private double distance;
+    private double mileage;
 
     private CFCalc() {
         this(-1.0);
@@ -57,6 +58,10 @@ public class CFCalc {
         return calcCF(co);
     }
 
+    public double calcCF(CommuteOption co, double distance, int pplPerOption, double mileage) {
+        return getEmissionFactor(co) * distance / pplPerOption / mileage;
+    }
+
 
     /** ======================================================================
      * 
@@ -74,6 +79,13 @@ public class CFCalc {
             throw new IllegalArgumentException("Distance cannot be negative");
         }
         distance = n;
+    }
+
+    public void setMilage(double n) {
+        if (n < 0.0) {
+            throw new IllegalArgumentException("Distance cannot be negative");
+        }
+        mileage = n;
     }
 
     public int setRate(CommuteOption co, double n) {
@@ -205,5 +217,6 @@ public class CFCalc {
         resetRates();
         resetPplCount();
         distance = -1;
+        mileage = -1;
     }
 }
