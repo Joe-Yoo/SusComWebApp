@@ -46,10 +46,58 @@ const SignUp = () => {
 
   return (
     <>
-      <div class="title">
-        <h1>Sustainable Commit Web App</h1>
+      <style>
+        {`
+          body {
+            background-image: url('src/pages/SignUpBackground.png');
+            background-repeat: no-repeat;
+            background-size:cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Sans Serif;
+          }
+          #title {
+            text-align: center;
+          }
+          h1 {
+            font-size: 70px;
+            color: #3B2F07;
+            margin-bottom: -5%;
+          }
+          form {
+            text-align: left;
+            font-size: 22px;
+          }
+          input {
+            padding: 10px 50px;
+            width: 80%;
+            margin-bottom: 1%;
+            border-radius: 25px;
+            border-color: black;
+          }
+          #submit_container {
+            margin-top: 10%;
+            text-align: center;
+          }
+          #submit_button {
+            padding: 10px;
+            border-radius: 25px;
+            border-color: black;
+            background-color: #7C882E;
+            color: white;
+            font-size: 22px;
+            font-family: Sans Serif;
+            text-weight: 400;
+          }
+          #submit_button:hover {
+            background-color: #3B2F07;
+        `}
+      </style>
+      <div id="title">
+        <h1>Welcome</h1>
       </div>
-      <div class="form">
+      <div id="form_container">
         <form
           name="myForm"
           action="/action_page.php"
@@ -61,7 +109,9 @@ const SignUp = () => {
           Password: <input type="password" name="fpassword" /> <br></br>
           Confirm Password: <input type="password" name="fpassword1" />{" "}
           <br></br>
-          <input type="submit" value="Submit" />
+          <div id="submit_container">
+            <input id="submit_button" type="submit" value="Submit" />
+          </div>
           <br></br>
           <br></br>
         </form>
