@@ -49,7 +49,7 @@ const SignUp = () => {
       <style>
         {`
           body {
-            background-image: url('src/pages/SignUpBackground.png');
+            background-image: url('https://cdn.discordapp.com/attachments/957848619036319755/1162164669952307210/SignUpBackground.png?ex=653af131&is=65287c31&hm=b124817e070f6fc2bccd188174602e7a4b4766ba9eefa4ce2705dbde97ea2ce7&');
             background-repeat: no-repeat;
             background-size:cover;
             display: flex;
