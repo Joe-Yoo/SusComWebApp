@@ -113,8 +113,7 @@ const Dashboard = () => {
     emFactorCall(commuteOptNum);
   };
 
-  const environmentalImpact()
- {
+  const environmentalImpact = () => {
   if (carbonFP < carbonFP1) {
     var a = "";
     if (commuteOptNum1 == 2) {
