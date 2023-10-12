@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-/*import './Dashboard.css';*/
+import { Outlet, Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [src, setSrc] = useState("");
@@ -14,54 +14,67 @@ const Dashboard = () => {
   const [carbonFP, setCFP] = useState("");
   const [emFactor, setEmFactor] = useState("");
   const [link, setLink] = useState(
-    "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA"
+    "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA",
   );
 
   const mapApiCall = () => {
     setLink(
-      `https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=${src}&destination=${dst}`
+      `https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=${src}&destination=${dst}`,
     );
   };
 
   const distanceApiCall = (srcParam, dstParam) => {
-    fetch('http://localhost:8080/api/maps/distance?origin='+srcParam+'&destination='+dstParam+'&mode=driving')
+    fetch(
+      "http://localhost:8080/api/maps/distance?origin=" +
+        srcParam +
+        "&destination=" +
+        dstParam +
+        "&mode=driving",
+    )
       .then((response) => response.json())
       .then((json) => {
+        console.log("here");
+        console.log(json);
+        console.log(json.rows[0].elements[0].distance.inMeters);
         setDist(json.rows[0].elements[0].distance.inMeters);
       })
       .catch((err) => {
         console.log(err.message);
       });
-  }
+  };
 
   const setCarpoolCall = (commuteOptParam, carpoolNumParam) => {
-    fetch('http://localhost:8080/update/carpool/'+commuteOptParam+"/"+carpoolNumParam)
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }
+    fetch(
+      "http://localhost:8080/update/carpool/" +
+        commuteOptParam +
+        "/" +
+        carpoolNumParam,
+    ).catch((err) => {
+      console.log(err.message);
+    });
+  };
 
   const cfCall = (commuteOptP, distP) => {
-    fetch('http://localhost:8080/carbon/'+commuteOptP+'/'+distP)
+    fetch("http://localhost:8080/carbon/" + commuteOptP + "/" + distP)
       .then((response) => response.json())
       .then((data) => {
         setCFP(data);
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err.message);
       });
-  }
+  };
 
   const emFactorCall = (commuteOptP) => {
-    fetch('http://localhost:8080/emission/'+commuteOptP)
-    .then((response) => response.json())
-    .then((data) => {
-      setEmFactor(data);
-    })
-    .catch((err)=>{
-      console.log(err.message);
-    });
-  }
+    fetch("http://localhost:8080/emission/" + commuteOptP)
+      .then((response) => response.json())
+      .then((data) => {
+        setEmFactor(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission
@@ -70,7 +83,7 @@ const Dashboard = () => {
      * setOpt for commuteOpt
      * and
      * setCarpool for carpoolNum
-     * 
+     *
      * All dependent on the input fields.
      */
 
@@ -79,8 +92,8 @@ const Dashboard = () => {
     setCarpoolCall(carpoolNum);
     cfCall(commuteOptNum, dist);
     emFactorCall(commuteOptNum);
-  }
-  
+  };
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -94,7 +107,7 @@ const Dashboard = () => {
       }
     });
   }, []);
-  
+
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
@@ -112,7 +125,12 @@ const Dashboard = () => {
       <section className="text">
         <h3>Where are we going today?</h3>
         <div className="address">
-          <form name="myForm" action="/action_page.php" onSubmit={handleSubmit} method="post">
+          <form
+            name="myForm"
+            action="/action_page.php"
+            onSubmit={handleSubmit}
+            method="post"
+          >
             <br />
             <input
               id="origin-input"
@@ -133,7 +151,12 @@ const Dashboard = () => {
             />
 
             <div id="mode-selector" className="controls">
-              <input type="radio" name="type" id="changemode-walking" checked="checked" />
+              <input
+                type="radio"
+                name="type"
+                id="changemode-walking"
+                checked="checked"
+              />
               <label htmlFor="changemode-walking">Walking</label>
 
               <input type="radio" name="type" id="changemode-transit" />
@@ -144,7 +167,6 @@ const Dashboard = () => {
             </div>
             <input type="submit" value="Submit" />
           </form>
-
         </div>
         <div className="carbon">
           <h3>Carbon Footprint</h3>
