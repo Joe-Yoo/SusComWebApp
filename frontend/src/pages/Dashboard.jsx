@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [carbonFP, setCFP] = useState("");
   const [carbonFP1, setCFP1] = useState("");
   const [emFactor, setEmFactor] = useState("");
+  const [fuel, setFuel] = useState("");
   const [link, setLink] = useState(
     "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA",
   );
@@ -213,6 +214,23 @@ const Dashboard = () => {
               <input type="radio" name="type" id="changemode-driving" onChange={setDriving}/>
               <label htmlFor="changemode-driving">Driving</label>
             </div>
+            <input
+              id="carpoolNum"
+              className="controls"
+              type="number"
+              placeholder="Enter passenger quantity"
+              value={carpoolNum}
+              onChange={(e) => setCarpool(e.target.value)}
+            />
+            <input
+              id="fuel"
+              className="controls"
+              type="number"
+              placeholder="Enter car fuel efficiency"
+              value={fuel}
+              onChange={(e) => setFuel(e.target.value)}
+            />
+            
             <input type="submit" value="Submit" />
           </form>
         </div>
@@ -228,7 +246,7 @@ const Dashboard = () => {
       <iframe
         width="1000"
         height="1000"
-        frameBorder="0"
+        frameborder="0"
         referrerPolicy="no-referrer-when-downgrade"
         src={link}
         allowFullScreen
