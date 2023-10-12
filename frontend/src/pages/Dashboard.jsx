@@ -23,24 +23,25 @@ const Dashboard = () => {
   const [comparison2, setComparison2] = useState("");
 
   const mapApiCall = () => {
-    setLink(
-      `https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=${src}&destination=${dst}`
+        setLink(
+      `https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&mode=${commuteOpt}&origin=${src}&destination=${dst}`
     );
   };
 
   const distanceApiCall = (srcParam, dstParam) => {
     fetch(
       "http://localhost:8080/api/maps/distance?origin=" +
-        srcParam +
-        "&destination=" +
-        dstParam +
-        "&mode=driving"
+      srcParam +
+      "&destination=" +
+      dstParam +
+      "&mode=driving"
     )
       .then((response) => response.json())
       .then((json) => {
         const distance = json.rows[0].elements[0].distance.inMeters;
         setDist(distance);
         cfCall(commuteOptNum, distance);
+        cfCall1(commuteOptNum, distance);
       })
       .catch((err) => {
         console.log(err.message);
@@ -50,9 +51,9 @@ const Dashboard = () => {
   const setCarpoolCall = (commuteOptParam, carpoolNumParam) => {
     fetch(
       "http://localhost:8080/update/carpool/" +
-        commuteOptParam +
-        "/" +
-        carpoolNumParam
+      commuteOptParam +
+      "/" +
+      carpoolNumParam
     ).catch((err) => {
       console.log(err.message);
     });
@@ -120,27 +121,24 @@ const Dashboard = () => {
     mapApiCall();
     distanceApiCall(src, dst);
     // setCarpoolCall(carpoolNum);
-    cfCall(commuteOptNum, dist);
-    cfCall1(commuteOptNum1, dist);
     emFactorCall(commuteOptNum);
   };
 
   const environmentalImpact = () => {
-  if (parseFloat(carbonFP) < parseFloat(carbonFP1)) {
-    var a = "";
-    if (commuteOptNum1 == 2) {
-      a = "gas car";
-      setComparison1("You saved " + (parseFloat(carbonFP1) - parseFloat(carbonFP)) + "kg of CO2 with this transportation mode over " + a + "." ); //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
+    if (parseFloat(carbonFP) < parseFloat(carbonFP1)) {
+      var a = "";
+      if (commuteOptNum1 == 2) {
+        a = "gas car";
+        setComparison1("You saved " + (parseFloat(carbonFP1) - parseFloat(carbonFP)) + "kg of CO2 with this transportation mode over " + a + "."); //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
+      }
+    } else {
+      setComparison1("You could've saved " + (parseFloat(carbonFP) - parseFloat(carbonFP1)) + "kg of CO2 with walking over this transportation.");
     }
-  } else {
-    setComparison1("You could've saved " + (parseFloat(carbonFP) - parseFloat(carbonFP1)) + "kg of CO2 with walking over this transportation." );
-  }
-   
-  //setComparison2() //you saved this amount of trees compared to transport mode x.
- };
 
     //setComparison2() //you saved this amount of trees compared to transport mode x.
   };
+
+  //setComparison2() //you saved this amount of trees compared to transport mode x.
 
   const navigate = useNavigate();
 
@@ -170,17 +168,17 @@ const Dashboard = () => {
 
   const setWalking = () => {
     console.log("setWalking");
-    setOpt("Walking");
+    setOpt("walking");
     setOptNum(0);
   };
   const setTransit = () => {
     console.log("setTransit");
-    setOpt("Transit");
+    setOpt("transit");
     setOptNum(4);
   };
   const setDriving = () => {
     console.log("setDriving");
-    setOpt("Driving");
+    setOpt("driving");
     setOptNum(2);
   };
 
@@ -274,7 +272,6 @@ const Dashboard = () => {
       <iframe
         width="1000"
         height="1000"
-        frameborder="0"
         referrerPolicy="no-referrer-when-downgrade"
         src={link}
         allowFullScreen
