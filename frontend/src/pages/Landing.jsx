@@ -41,6 +41,9 @@ const Landing = () => {
         button:visited {
             background-color: #7C882E;
         }
+        a {
+          color: white;
+        }
         a:visited {
             color: white;
         }
