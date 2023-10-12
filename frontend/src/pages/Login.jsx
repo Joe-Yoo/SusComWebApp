@@ -81,10 +81,11 @@ const Login = () => {
             color: white;
             font-size: 22px;
             font-family: Sans Serif;
-            text-weight: 400;
+            font-weight: bold;
           }
           #submit_button:hover {
             background-color: #3B2F07;
+          }
         `}
       </style>
       <h1>Welcome Back</h1>
