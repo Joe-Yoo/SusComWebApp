@@ -61,7 +61,10 @@ const Dashboard = () => {
   };
 
   const cfCall = (commuteOptP, distP) => {
-    fetch("http://localhost:8080/carbon/" + commuteOptP + "/" + distP+"/"+carpoolNum+"/"+fuel)
+    fetch("http://localhost:8080/carbon/" + commuteOptP 
+      + "/" + distP 
+      + "/" + carpoolNum 
+      + "/" + fuel)
       .then((response) => response.json())
       .then((data) => {
         setCFP(data);
@@ -72,7 +75,10 @@ const Dashboard = () => {
   };
 
   const cfCall1 = (commuteOptP, distP) => {
-    fetch("http://localhost:8080/carbon/" + commuteOptP + "/" + distP+"/"+carpoolNum+"/"+fuel)
+    fetch("http://localhost:8080/carbon/" + commuteOptP 
+      + "/" + distP
+      + "/" + carpoolNum
+      + "/" + fuel)
       .then((response) => response.json())
       .then((data) => {
         setCFP1(data);
