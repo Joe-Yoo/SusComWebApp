@@ -6,25 +6,25 @@ import { Outlet, Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [src, setSrc] = useState("");
-const [dst, setDst] = useState("");
+  const [dst, setDst] = useState("");
   const [dist, setDist] = useState("");
   const [commuteOpt, setOpt] = useState("");
   const [commuteOptNum, setOptNum] = useState(2);
   const [commuteOptNum1, setOptNum1] = useState(3);
-  const [carpoolNum, setCarpool] = useState(1);
+  const [carpoolNum, setCarpool] = useState();
   const [carbonFP, setCFP] = useState("");
   const [carbonFP1, setCFP1] = useState("");
   const [emFactor, setEmFactor] = useState("");
   const [fuel, setFuel] = useState("");
   const [link, setLink] = useState(
-    "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA",
+    "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA"
   );
   const [comparison1, setComparison1] = useState("");
-  const [comparison2, setComparison2] = useState(""); 
+  const [comparison2, setComparison2] = useState("");
 
   const mapApiCall = () => {
     setLink(
-      `https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=${src}&destination=${dst}`,
+      `https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=${src}&destination=${dst}`
     );
   };
 
@@ -34,7 +34,7 @@ const [dst, setDst] = useState("");
         srcParam +
         "&destination=" +
         dstParam +
-        "&mode=driving",
+        "&mode=driving"
     )
       .then((response) => response.json())
       .then((json) => {
@@ -52,7 +52,7 @@ const [dst, setDst] = useState("");
       "http://localhost:8080/update/carpool/" +
         commuteOptParam +
         "/" +
-        carpoolNumParam,
+        carpoolNumParam
     ).catch((err) => {
       console.log(err.message);
     });
@@ -104,6 +104,19 @@ const [dst, setDst] = useState("");
 
     console.log(commuteOpt);
     console.log(commuteOptNum);
+    if (src == "") {
+      alert("Origin must be filled out");
+      return false;
+    } else if (dst == "") {
+      alert("Destination must be filled out");
+      return false;
+    } else if (carpoolNum == "") {
+      alert("Carpool number must be filled out");
+      return false;
+    } else if (fuel == "") {
+      alert("Fuel efficiency must be filled out");
+      return false;
+    }
     mapApiCall();
     distanceApiCall(src, dst);
     // setCarpoolCall(carpoolNum);
@@ -113,17 +126,22 @@ const [dst, setDst] = useState("");
   };
 
   const environmentalImpact = () => {
-  if (carbonFP < carbonFP1) {
-    var a = "";
-    if (commuteOptNum1 == 2) {
-      a = "gas car";
+    if (carbonFP < carbonFP1) {
+      var a = "";
+      if (commuteOptNum1 == 2) {
+        a = "gas car";
+      }
+      setComparison1(
+        "You saved " +
+          (carbonFP1 - carbonFP) +
+          "kg of CO2 with this transportation mode over " +
+          a +
+          "."
+      ); //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
     }
-    setComparison1("You saved " + (carbonFP1 - carbonFP) + "kg of CO2 with this transportation mode over " + a + "." ); //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
-  }
-   
-  //setComparison2() //you saved this amount of trees compared to transport mode x.
- };
 
+    //setComparison2() //you saved this amount of trees compared to transport mode x.
+  };
 
   const navigate = useNavigate();
 
@@ -155,17 +173,17 @@ const [dst, setDst] = useState("");
     console.log("setWalking");
     setOpt("Walking");
     setOptNum(0);
-  }
+  };
   const setTransit = () => {
     console.log("setTransit");
     setOpt("Transit");
     setOptNum(4);
-  }
+  };
   const setDriving = () => {
     console.log("setDriving");
     setOpt("Driving");
     setOptNum(2);
-  }
+  };
 
   return (
     <>
@@ -206,17 +224,28 @@ const [dst, setDst] = useState("");
               />
               <label htmlFor="changemode-walking">Walking</label>
 
-              <input type="radio" name="type" id="changemode-transit" onChange={setTransit}/>
+              <input
+                type="radio"
+                name="type"
+                id="changemode-transit"
+                onChange={setTransit}
+              />
               <label htmlFor="changemode-transit">Transit</label>
 
-              <input type="radio" name="type" id="changemode-driving" onChange={setDriving}/>
+              <input
+                type="radio"
+                name="type"
+                id="changemode-driving"
+                defaultChecked
+                onChange={setDriving}
+              />
               <label htmlFor="changemode-driving">Driving</label>
             </div>
             <input
               id="carpoolNum"
               className="controls"
               type="number"
-              placeholder="Enter passenger quantity"
+              placeholder="Passengers (0 if not driving)"
               value={carpoolNum}
               onChange={(e) => setCarpool(e.target.value)}
             />
@@ -224,11 +253,11 @@ const [dst, setDst] = useState("");
               id="fuel"
               className="controls"
               type="number"
-              placeholder="Enter car fuel efficiency"
+              placeholder="Car mpg (0 if not driving)"
               value={fuel}
               onChange={(e) => setFuel(e.target.value)}
             />
-            
+
             <input type="submit" value="Submit" />
           </form>
         </div>
