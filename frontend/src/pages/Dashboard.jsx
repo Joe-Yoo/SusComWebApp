@@ -135,6 +135,18 @@ const Dashboard = () => {
       setComparison1("You could've saved " + (parseFloat(carbonFP) - parseFloat(carbonFP1)) + "kg of CO2 with walking over this transportation.");
     }
 
+    if (parseFloat(carbonFP) < parseFloat(carbonFP1)) {
+      var a = "";
+      if (commuteOptNum1 == 2) {
+        a = "gas car";
+        setComparison2("You saved " + (parseFloat(carbonFP1) - parseFloat(carbonFP))/50 + " trees with this transportation mode over " + a + "."); //you save this amount of carbon dioxide carbonFP, we are going to add another cfCall
+      }
+    } else {
+      setComparison2("You could've saved " + (parseFloat(carbonFP) - parseFloat(carbonFP1))/50 + " trees with walking over this transportation.");
+    }
+
+
+
     //setComparison2() //you saved this amount of trees compared to transport mode x.
   };
 
@@ -259,6 +271,7 @@ const Dashboard = () => {
           </form>
 
           <h3>{comparison1}</h3>
+          <h3>{comparison2}</h3>
         </div>
         <div className="carbon">
           <h3>Carbon Footprint</h3>
