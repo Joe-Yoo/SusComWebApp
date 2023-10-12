@@ -11,20 +11,20 @@ const Dashboard = () => {
   const [commuteOpt, setOpt] = useState("");
   const [commuteOptNum, setOptNum] = useState(2);
   const [commuteOptNum1, setOptNum1] = useState(3);
-  const [carpoolNum, setCarpool] = useState(1);
+  const [carpoolNum, setCarpool] = useState();
   const [carbonFP, setCFP] = useState("");
   const [carbonFP1, setCFP1] = useState("");
   const [emFactor, setEmFactor] = useState("");
   const [fuel, setFuel] = useState("");
   const [link, setLink] = useState(
-    "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA",
+    "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA"
   );
   const [comparison1, setComparison1] = useState("");
-  const [comparison2, setComparison2] = useState(""); 
+  const [comparison2, setComparison2] = useState("");
 
   const mapApiCall = () => {
     setLink(
-      `https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=${src}&destination=${dst}`,
+      `https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=${src}&destination=${dst}`
     );
   };
 
@@ -34,7 +34,7 @@ const Dashboard = () => {
         srcParam +
         "&destination=" +
         dstParam +
-        "&mode=driving",
+        "&mode=driving"
     )
       .then((response) => response.json())
       .then((json) => {
@@ -52,7 +52,7 @@ const Dashboard = () => {
       "http://localhost:8080/update/carpool/" +
         commuteOptParam +
         "/" +
-        carpoolNumParam,
+        carpoolNumParam
     ).catch((err) => {
       console.log(err.message);
     });
@@ -104,6 +104,19 @@ const Dashboard = () => {
 
     console.log(commuteOpt);
     console.log(commuteOptNum);
+    if (src == "") {
+      alert("Origin must be filled out");
+      return false;
+    } else if (dst == "") {
+      alert("Destination must be filled out");
+      return false;
+    } else if (carpoolNum == "") {
+      alert("Carpool number must be filled out");
+      return false;
+    } else if (fuel == "") {
+      alert("Fuel efficiency must be filled out");
+      return false;
+    }
     mapApiCall();
     distanceApiCall(src, dst);
     // setCarpoolCall(carpoolNum);
@@ -126,6 +139,8 @@ const Dashboard = () => {
   //setComparison2() //you saved this amount of trees compared to transport mode x.
  };
 
+    //setComparison2() //you saved this amount of trees compared to transport mode x.
+  };
 
   const navigate = useNavigate();
 
@@ -157,20 +172,17 @@ const Dashboard = () => {
     console.log("setWalking");
     setOpt("Walking");
     setOptNum(0);
-    setOptNum1(2);
-  }
+  };
   const setTransit = () => {
     console.log("setTransit");
     setOpt("Transit");
     setOptNum(4);
-    setOptNum1(2);
-  }
+  };
   const setDriving = () => {
     console.log("setDriving");
     setOpt("Driving");
     setOptNum(2);
-    setOptNum1(0);
-  }
+  };
 
   return (
     <>
@@ -211,17 +223,28 @@ const Dashboard = () => {
               />
               <label htmlFor="changemode-walking">Walking</label>
 
-              <input type="radio" name="type" id="changemode-transit" onChange={setTransit}/>
+              <input
+                type="radio"
+                name="type"
+                id="changemode-transit"
+                onChange={setTransit}
+              />
               <label htmlFor="changemode-transit">Transit</label>
 
-              <input type="radio" name="type" id="changemode-driving" onChange={setDriving}/>
+              <input
+                type="radio"
+                name="type"
+                id="changemode-driving"
+                defaultChecked
+                onChange={setDriving}
+              />
               <label htmlFor="changemode-driving">Driving</label>
             </div>
             <input
               id="carpoolNum"
               className="controls"
               type="number"
-              placeholder="Enter passenger quantity"
+              placeholder="Passengers (0 if not driving)"
               value={carpoolNum}
               onChange={(e) => setCarpool(e.target.value)}
             />
@@ -229,11 +252,11 @@ const Dashboard = () => {
               id="fuel"
               className="controls"
               type="number"
-              placeholder="Enter car fuel efficiency"
+              placeholder="Car mpg (0 if not driving)"
               value={fuel}
               onChange={(e) => setFuel(e.target.value)}
             />
-            
+
             <input type="submit" value="Submit" />
           </form>
 
