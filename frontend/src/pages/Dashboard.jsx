@@ -175,7 +175,7 @@ const Dashboard = () => {
   return (
     <>
       <section className="text">
-        <h3>Where are we going today? {comparison1}</h3>
+        <h3>Where are we going today?</h3>
         <div className="address">
           <form
             name="myForm"
