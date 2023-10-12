@@ -30,7 +30,7 @@ const Dashboard = () => {
 
   const distanceApiCall = (srcParam, dstParam) => {
     fetch(
-      "http://localhost:8080/api/maps/distance?origin=" +
+      "https://cs3300-project1-401807.ue.r.appspot.com/api/maps/distance?origin=" +
       srcParam +
       "&destination=" +
       dstParam +
@@ -50,7 +50,7 @@ const Dashboard = () => {
 
   const setCarpoolCall = (commuteOptParam, carpoolNumParam) => {
     fetch(
-      "http://localhost:8080/update/carpool/" +
+      "https://cs3300-project1-401807.ue.r.appspot.com/update/carpool/" +
       commuteOptParam +
       "/" +
       carpoolNumParam,
@@ -61,7 +61,7 @@ const Dashboard = () => {
   };
 
   const cfCall = (commuteOptP, distP) => {
-    fetch("http://localhost:8080/carbon/" + commuteOptP 
+    fetch("https://cs3300-project1-401807.ue.r.appspot.com/carbon/" + commuteOptP 
       + "/" + distP 
       + "/" + carpoolNum 
       + "/" + fuel)
@@ -75,7 +75,7 @@ const Dashboard = () => {
   };
 
   const cfCall1 = (commuteOptP, distP) => {
-    fetch("http://localhost:8080/carbon/" + commuteOptP 
+    fetch("https://cs3300-project1-401807.ue.r.appspot.com/carbon/" + commuteOptP 
       + "/" + distP
       + "/" + carpoolNum
       + "/" + fuel)
@@ -89,7 +89,7 @@ const Dashboard = () => {
   };
 
   const emFactorCall = (commuteOptP) => {
-    fetch("http://localhost:8080/emission/" + commuteOptP)
+    fetch("https://cs3300-project1-401807.ue.r.appspot.com/emission/" + commuteOptP)
       .then((response) => response.json())
       .then((data) => {
         setEmFactor(data);
@@ -100,7 +100,7 @@ const Dashboard = () => {
   };
 
   const setMilage = (mileageP) => {
-    fetch("http://localhost:8080/update/mileage/"+mileageP, {method: 'PUT'})
+    fetch("https://cs3300-project1-401807.ue.r.appspot.com/update/mileage/"+mileageP, {method: 'PUT'})
       .catch((err) => {
         console.log(err.message);
       });
