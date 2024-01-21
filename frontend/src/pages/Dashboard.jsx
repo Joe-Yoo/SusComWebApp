@@ -17,14 +17,14 @@ const Dashboard = () => {
   const [emFactor, setEmFactor] = useState("");
   const [fuel, setFuel] = useState("");
   const [link, setLink] = useState(
-    "https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&origin=New+York,NY&destination=Atlanta,GA"
+    "https://www.google.com/"
   );
   const [comparison1, setComparison1] = useState("");
   const [comparison2, setComparison2] = useState("");
 
   const mapApiCall = () => {
         setLink(
-      `https://www.google.com/maps/embed/v1/directions?key=AIzaSyA5nM5ssOWReenHFLOjtm-z5ovk_pMVFyo&mode=${commuteOpt}&origin=${src}&destination=${dst}`
+      `https://www.google.com/`
     );
   };
 
